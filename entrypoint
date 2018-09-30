@@ -4,6 +4,8 @@ set -e
 userConfPath="/etc/sftp-users.conf"
 userConfFinalPath="/var/run/sftp-users.conf"
 
+s3fs $S3BUCKET /home/aws/s3bucket -o allow_other -o mp_umask="0022" -o iam_role="auto" -o dbglevel=info -f -o curldbg
+
 function printHelp() {
     echo "Add users as command arguments, STDIN or mounted in $userConfPath"
     echo "Syntax: user:pass[:e][:uid[:gid]]..."
@@ -64,6 +66,12 @@ function createUser() {
     /etc/init.d/rsyslog start # create the socket
     ln -f /home/sftp.log.socket /home/$user/dev/log
     touch /var/log/sftp.log
+
+    ln -s /home/aws/s3bucket/$user/.ssh /home/$user/.ssh
+    ln -s /home/aws/s3bucket/$user/share/inbound  /home/$user/inbound
+    ln -s /home/aws/s3bucket/$user/share/outbound /home/$user/outbound
+    chmod -R 755 /home/$user/inbound
+    chmod -R 755 /home/$user/outbound
 
     if [ -z "$pass" ]; then
         pass="$(echo `</dev/urandom tr -dc A-Za-z0-9 | head -c256`)"

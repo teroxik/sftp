@@ -4,7 +4,7 @@ set -e
 userConfPath="/etc/sftp-users.conf"
 userConfFinalPath="/var/run/sftp-users.conf"
 
-s3fs $S3BUCKET /home/aws/s3bucket -o allow_other -o mp_umask="0022" -o iam_role="auto" -o dbglevel=info -f -o curldbg
+s3fs $SFTP_S3_BUCKET /home/aws/s3bucket -o allow_other -o mp_umask="0022" -o iam_role="auto" -o dbglevel=info -f -o curldbg
 
 function printHelp() {
     echo "Add users as command arguments, STDIN or mounted in $userConfPath"

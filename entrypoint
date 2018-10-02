@@ -77,8 +77,8 @@ function createUser() {
     ln -s $FTP_DIRECTORY/$user/.ssh /home/$user/.ssh
     ln -s $FTP_DIRECTORY/$user/share/inbound  /home/$user/inbound
     ln -s $FTP_DIRECTORY/$user/share/outbound /home/$user/outbound
-    chmod -R 755 /home/$user/inbound
-    chmod -R 755 /home/$user/outbound
+    chmod -R 755 $FTP_DIRECTORY/$user/inbound
+    chmod -R 755 $FTP_DIRECTORY/$user/outbound
 
     if [ -z "$pass" ]; then
         pass="$(echo `</dev/urandom tr -dc A-Za-z0-9 | head -c256`)"
@@ -90,8 +90,8 @@ function createUser() {
     # Add SSH keys to authorized_keys with valid permissions
     if [ -d /home/$user/.ssh/keys ]; then
         cat /home/$user/.ssh/keys/* >> /home/$user/.ssh/authorized_keys
-        chown $user /home/$user/.ssh/authorized_keys
-        chmod 600 /home/$user/.ssh/authorized_keys
+        chown $user $FTP_DIRECTORY/$user/.ssh/authorized_keys
+        chmod 600 $FTP_DIRECTORY/$user/.ssh/authorized_keys
     fi
 }
 

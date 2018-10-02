@@ -75,8 +75,8 @@ function createUser() {
     touch /var/log/sftp.log
 
     ln -s $FTP_DIRECTORY/$user/.ssh /home/$user/.ssh
-    ln -s $FTP_DIRECTORY/$user/share/inbound  /home/$user/inbound
-    ln -s $FTP_DIRECTORY/$user/share/outbound /home/$user/outbound
+    ln -s $FTP_DIRECTORY/$user/inbound  /home/$user/inbound
+    ln -s $FTP_DIRECTORY/$user/outbound /home/$user/outbound
     chmod -R 755 $FTP_DIRECTORY/$user/inbound
     chmod -R 755 $FTP_DIRECTORY/$user/outbound
 

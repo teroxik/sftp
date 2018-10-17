@@ -74,10 +74,10 @@ function createUser() {
     ln -f /home/sftp.log.socket /home/$user/dev/log
     touch /var/log/sftp.log
 
-    mdkir /home/$user/.ssh
+    mkdir /home/$user/.ssh
     mkdir /home/$user/inbound
     mkdir /home/$user/outbound
-        
+
     mount --bind $FTP_DIRECTORY/$user/.ssh /home/$user/.ssh
     mount --bind $FTP_DIRECTORY/$user/inbound  /home/$user/inbound
     mount --bind $FTP_DIRECTORY/$user/outbound /home/$user/outbound

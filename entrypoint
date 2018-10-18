@@ -74,6 +74,10 @@ function createUser() {
     ln -f /home/sftp.log.socket /home/$user/dev/log
     touch /var/log/sftp.log
 
+    mkdir /home/$user/.ssh
+    chmod 755 /home/$user/.ssh
+    chown $user /home/$user/.ssh
+
     mkdir /home/$user/inbound
     mkdir /home/$user/outbound
 

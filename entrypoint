@@ -79,7 +79,9 @@ function createUser() {
     chown $user /home/$user/.ssh
 
     mkdir /home/$user/inbound
+    chown $user /home/$user/inbound
     mkdir /home/$user/outbound
+    chown $user /home/$user/outbound
 
     mount --bind $S3_DIRECTORY/$user/inbound /home/$user/inbound
     mount --bind $S3_DIRECTORY/$user/outbound /home/$user/outbound
